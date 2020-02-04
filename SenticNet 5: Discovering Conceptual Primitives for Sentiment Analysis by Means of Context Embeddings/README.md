@@ -4,6 +4,11 @@ SenticNet5：利用上下文嵌入发现用于情感分析的概念原语
 
 ## Abstract
 
+随着深度学习的发展，人工智能有新的活力。机器学习在计算机视觉，语音识别和医疗诊断等领域取得成功，然而自然语言理解还没有取得巨大进展
+
+原因之一是自下而上的方法对于模式识别是可行的，但推理和理解往往需要自上而下的方法
+
+
 ## Introduction
 ## Related Work
 ## The Importance of Conceptual Primitives
