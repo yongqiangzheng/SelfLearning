@@ -95,10 +95,45 @@ AffectiveSpace VS AffectiveSpace 2
 ```
 
 ### Mood-Tag Evaluation
-jaskdfjlkasdf
+
+Sentic level  | AffectiveSpace  | AffectiveSpace 2 | +
+---- | ----- | ------ | ------
+ecstasy | 77.3% | 84.5% | 7.2%
+joy | 83.9% | 90.1% | 6.2%
+serenity | 68.8% | 76.3% | 7.5%
+pensiveness | 74.5% | 79.0% | 4.5%
+sadness | 81.2% | 89.6% | 8.4%
+grief | 79.5% | 87.4% | 7.9%
+
+
 
 ### Sentic Computing Engine
-fasdfhlsakfj
-asfasfhsdajf
+
+情感计算引擎由4个模块组成
+
+预处理模型 浏览文本
+
+语义解析器 将文本解构为概念
+
+IsaCore模块 方面提取
+
+AffectiveSpave模块 极性检测
+
+IsaCore是一个常识（从Web收集的词汇知识）的语义网络，其重点是ISA关系，AffectiveSpace是利用多种关系的情感常识（通常在网络上找不到的琐碎知识）的一个向量空间，前者利用语义来执行方面提取的任务，后者则利用情感信息来推断自然语言概念的极性
+
+预处理模块利用语言词典来解释文本中观点（特殊标点，完整的大写单词，跨语言拟声词，感叹词，程度副词和表情符号等）的情感，然后进行否定检测，否定词不一定改变极性，而且否定词可能用微妙的方式表达。最后将文本转换为小写，根据连词分成多个子句。
+
+语义解析器在AffectNet和IsaCore中查找每个单词，获得单词的基本类别信息，将这些潜在类别和语料库中的每个结构指定的类别进行比较，找到最佳匹配项。另外，语义解析器还为每个检索到的概念提供其相对频率，价和状态，即该概念在文本中的出现，其正负含义以及表示该概念的强度程度。对于每个子句都会生成一个小型概念袋（small bags of concepts,SBoC）,分别用于IsaCore和AffectiveSpace分析。前者利用公共知识库和常识库的图表示来检测语义，后者利用AffectNet的向量空间表示来推断语义。
+
+该模型过于复杂，暂时写到这里
+
+category | AffectiveSpace | AffectiveSpace 2 | +
+---- | ----- | ------ | ------
+clinical service | 75.2% | 80.8% | 5.6%
+communication | 74.5% | 85.1% | 10.6%
+food | 82.0% | 83.7% | 1.7%
+parking | 74.0% | 74.0% | 0%
+staff | 81.1% | 83.2% | 2.1%
+timeliness | 73.4% | 84.6% | 11.2%
 
 ## Conclusions and Future Work
