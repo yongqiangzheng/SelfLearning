@@ -8,9 +8,14 @@ SentiWordNet3.0：一种用于情感分析和意见挖掘的增强型词汇资�
 SentiWordNet3.0是对同义词集标注积极、消极和中性分数，同一单词不同释义可能会有不同的分数。三个分数的值在\[0,1]之间，和为1。同义集可能对所有三个类别都具有非零分数，表示同义词集的单词对三种情感的程度。SentiWordNet3.0可以点击[这里](http://sentiwordnet.isti.cnr.it/)使用
 
 ## A brief history of SENTIWORDNET
-SentiWordNet1.0标注WordNet2.0，SentiWordNet3.0标注WordNet3.0<br>
-SentiWordNet1.0使用弱监督、半监督学习算法，SentiWordNet3.0使用半监督学习算法，结果馈送到random-walk，迭代至收敛<br>
-SentiWordNet1.0用同义词集的解释作为语义表示用于分类，SentiWordNet3.0用Princeton WordNet Gloss Corpus作为语义表示用于分类
+SentiWordNet1.0标注WordNet2.0<br>
+SentiWordNet3.0标注WordNet3.0
+
+SentiWordNet1.0使用弱监督、半监督学习算法<br>
+SentiWordNet3.0使用半监督学习算法，结果馈送到random-walk，迭代至收敛
+
+SentiWordNet1.0用同义词集的解释作为语义表示用于分类<br>
+SentiWordNet3.0用Princeton WordNet Gloss Corpus作为语义表示用于分类
 
 ## Generating SENTIWORDNET 3.0
 SentiWordNet3.0有2个过程：半监督学习和random-walk
@@ -39,4 +44,18 @@ random-walk有2个步骤
 random-walk积极和消极分数太小，这会使中性分数非常高，不适合极性分数的生成。作者观察发现，在半监督学习过程中，积极或消极都遵循幂律分布（情感分数越高，同义词集数量越少），因此，作者通过两个幂函数a1*x^b1和a2*x^b2去拟合由图计算得到的分数的分布，而中性分数=1-(积极分数+消极分数)
 
 2.运行迭代直至收敛
+
+## Evaluating SENTIWORDNET 3.0
+SentiWordNet3.0选取出Micro-WN(Op)-3.0中的同义词集，与之作比较
+
+### Micro-WN(Op)-3.0
+Micro-WN(Op)有1105个的同义词集，由5个人手工标注积极、消极和中性<br>
+Micro-WN(Op)(1):1-110 5个人共同标注<br>
+Micro-WN(Op)(2):111-606 3个人独立标注<br>
+Micro-WN(Op)(3):607-1105 2个人独立标注<br>
+Micro-WN(Op)服从WordNet的词性分布，Micro-WN(Op)(x)服从Micro-WN(Op)的词性分布 (x=1,2,3)
+
+作者将SentiWordNet和Micro-WN(Op)(2)(3)作比较，由于Micro-WN(Op)是基于WordNet2.0标注，不能和SentiWordNet3.0直接比较。因此，作者用了3种策略将WordNet2.0的释义映射到WordNet3.0，从而得到Micro-WN(Op)-3.0
+
+#### WORDNET sense mappings
 
