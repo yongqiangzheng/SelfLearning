@@ -10,4 +10,33 @@ SentiWordNet3.0是对同义词集标注积极、消极和中性分数，同一�
 ## A brief history of SENTIWORDNET
 SentiWordNet1.0标注WordNet2.0，SentiWordNet3.0标注WordNet3.0<br>
 SentiWordNet1.0使用弱监督、半监督学习算法，SentiWordNet3.0使用半监督学习算法，结果馈送到random-walk，迭代至收敛<br>
-SentiWordNet1.0用同义词集的解释作为语义表示用于分类，SentiWordNet3.0用Princeton WordNet Gloss Corpus
+SentiWordNet1.0用同义词集的解释作为语义表示用于分类，SentiWordNet3.0用Princeton WordNet Gloss Corpus作为语义表示用于分类
+
+## Generating SENTIWORDNET 3.0
+SentiWordNet3.0有2个过程：半监督学习和random-walk
+
+### The semi-supervised learning step
+半监督学习有4个步骤
+
+1.扩展种子集合<br>
+初始种子集合由7个典型积极术语集合和7个典型消极术语集合，通过WordNet的二元关系扩展初始种子集合。根据同义关系将术语加入到相同极性的集合，根据反义关系将术语加入到相反极性的集合。通过设置半径k，将集合中的术语在距离为k的所有有同义和反义关系的术语加入到集合里
+
+2.分类器训练<br>
+将前面得到的2组同义词集和假定具有Obj属性的另一组同义词集作为训练集用于训练分类器。SentiwordNet3.0使用Princeton WordNet Gloss Corpus的注释，这些注释不是对术语的解释，而是WordNet同义词集序列。该分类器不是对术语的解释而是对同义词集序列作分类，因此也可以将该分类器称为同义词集袋(bag of synsets)模型。SentiWordNet1.0使用的是术语的解释，属于词袋(bag of words)模型
+
+3.同义词集分类<br>
+将WordNet所有同义词集（包括步骤2使用的同义词集）输入到分类器分类
+
+4.分类器组合<br>
+通过使用不同的半径k={0，2，4，6}和不同的分类算法（Rocchio算法和SVMs）构造8个分类器，将8个分类器的结果取均值得到同义词集的最终极性分数
+
+### The random-walk step
+random-walk有2个步骤
+
+1.将WordNet构造为一张图<br>
+作者假定两个词存在有向链接，当且仅当一个词出现在另一个词的定义里。作者认为，如果定义一个词的大多数术语是积极的，那么这个被定义的词有很大概率是积极的。换句话说，积极和消极在图中是从定义中使用的术语到被定义的术语这一路径流动的。<br>
+然而，在WordNet中同义词集的定义没有语义消歧，没有办法构造上述关系。Princeton WordNet Gloss Corpus正好解决这一问题，每个词的定义都是由同义词集组成的，由此可以构造一张图<br>
+random-walk积极和消极分数太小，这会使中性分数非常高，不适合极性分数的生成。作者观察发现，在半监督学习过程中，积极或消极都遵循幂律分布（情感分数越高，同义词集数量越少），因此，作者通过两个幂函数a1*x^b1和a2*x^b2去拟合由图计算得到的分数的分布，而中性分数=1-(积极分数+消极分数)
+
+2.运行迭代直至收敛
+
