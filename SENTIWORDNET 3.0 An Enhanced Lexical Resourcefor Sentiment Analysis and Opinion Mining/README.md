@@ -50,12 +50,20 @@ SentiWordNet3.0选取出Micro-WN(Op)-3.0中的同义词集，与之作比较
 
 ### Micro-WN(Op)-3.0
 Micro-WN(Op)有1105个的同义词集，由5个人手工标注积极、消极和中性<br>
-Micro-WN(Op)(1):1-110 5个人共同标注<br>
-Micro-WN(Op)(2):111-606 3个人独立标注<br>
-Micro-WN(Op)(3):607-1105 2个人独立标注<br>
+Micro-WN(Op)(1):   1-110 5个人共同标注<br>
+Micro-WN(Op)(2): 111-606 3个人独立标注<br>
+Micro-WN(Op)(3): 607-1105 2个人独立标注<br>
 Micro-WN(Op)服从WordNet的词性分布，Micro-WN(Op)(x)服从Micro-WN(Op)的词性分布 (x=1,2,3)
 
-作者将SentiWordNet和Micro-WN(Op)(2)(3)作比较，由于Micro-WN(Op)是基于WordNet2.0标注，不能和SentiWordNet3.0直接比较。因此，作者用了3种策略将WordNet2.0的释义映射到WordNet3.0，从而得到Micro-WN(Op)-3.0
+作者将SentiWordNet和Micro-WN(Op)(2)(3)作比较，由于Micro-WN(Op)是基于WordNet2.0标注，不能和SentiWordNet3.0直接比较。因此，作者用了3种策略将WordNet2.0的释义映射到WordNet3.0，构造[Micro-WN(Op)-3.0](http://sentiwordnet.isti.cnr.it/)
 
 #### WORDNET sense mappings
+WordNet有2.0到3.0的[映射](http://wordnetcode.princeton.edu/3.0/WNsnsmap-3.0.tar.gz)，但仅仅是名词和动词的映射，每个映射都有置信度(0-100)，作者仅选取置信度为100的映射，最终得到269个映射
 
+#### Synset term matching
+如果Micro-WN(OP)包含和WordNet3.0完全相同的术语，并且这样的术语集合只出现在WordNet2.0和3.0中的一个S同义词集中，则认为这两个同义词集为同一个
+
+#### Gloss similarity
+将Micro-WN(OP)的一个同义词集的注释和WordNet3.0的所有注释计算Dice系数，这种方法最有效
+
+### Evaluation measure
