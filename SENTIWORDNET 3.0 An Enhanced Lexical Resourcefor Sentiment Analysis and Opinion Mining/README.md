@@ -67,3 +67,22 @@ WordNet有2.0到3.0的[映射](http://wordnetcode.princeton.edu/3.0/WNsnsmap-3.0
 将Micro-WN(OP)的一个同义词集的注释和WordNet3.0的所有注释计算Dice系数，这种方法最有效
 
 ### Evaluation measure
+作者使用归一化的Kendall tau距离来比较SentiWordNet和Micro-WN(OP)的相似程度，距离越小，效果越好
+
+## Results
+SentiWordNet版本对比
+SentiWordNet1.0 vs Micro-WN(OP)<br>
+SentiWordNet3.0 vs Micro-WN(OP)-3.0
+
+&nbsp | Positivity | Negativity
+-|-|-
+SentiWordNet 1.0 | .349 | .296
+SentiWordNet 3.0 |.281 (-19.48%) |.231 (-21.96%)
+
+SentiWordNet3.0算法对比
+半监督学习 vs 半监督学习+random-walk
+
+&nbsp;|Positivity|Negativity
+-|-|-
+SentiWordNet 3.0-semi|.339|.286
+SentiWordNet 3.0|.281 (-17.11%)|.231 (-19.23%)
