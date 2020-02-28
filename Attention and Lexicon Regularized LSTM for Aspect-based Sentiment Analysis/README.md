@@ -37,11 +37,94 @@ adorable [1.0, 1.0, 1.0, 0.55] MPQA(1.0), Opener(1.0), Opinion Lexicon(1.0) and 
 ```
 
 #### Lexicon Integration
+![Model.png](Model.png)
+
 L = W<sub>l</sub>V<sub>l</sub><br>
 l = Lα<sup>T</sup><br>
 h<sup>∗</sup> = tanh(W<sub>p</sub>r + W<sub>x</sub>h<sub>N</sub> + W<sub>l</sub>l)<br>
+
+
+### Attention Regularization
+由于注意力过拟合，模型更注意句子后面的部分，作者在损失函数加入对注意力分数的正则化
+
 loss = -Σ<sub>i</sub>y<sub>i</sub>log(y<sup>ˆ</sup><sub>i</sub>)+λ||Θ||<sup>2</sup><sub>2</sub> + β · R(α)<br>
-R(α) = σ(α)<br>
-R(α) = =-\[-Σ<sub>i</sub><sup>N</sup> α<sub>i</sub> · log(α<sub>i</sub>)]
+R(α)使用了两种计算方法：<br>
+标准差：R(α) = σ(α)<br>
+负信息熵：R(α) = =-\[-Σ<sub>i</sub><sup>N</sup> α<sub>i</sub> · log(α<sub>i</sub>)]
+
+## Experiments
+
+###  Dataset
+SemEval-2014餐馆评论数据集<br>
+方面：{food, price, service, ambience, miscellaneous}<br>
+情感：{positive, neutral, negative}<br>
+训练集：3518 测试集： 973<br>
+词嵌入：GloVe_840b_300d
+
+### Lexicons
+&nbsp;|Pos|Neu|Neg|In Corpus
+-|-|-|-|-
+MPQA|2298|440|4148|908
+OL|2004|3|4780|732
+Opener|2298|440|4147|908
+Vader|3333|0|4170|656
+Merged U|5129|404|7764|1234
 
 
+{bar, try, too}删除，极性被标为消极<br>
+{n't, not}极性分数设置为-1
+
+### Evaluation
+&nbsp;|CV|σ<sup>CV</sup>|TEST|σ<sup>TEST</sup>
+-|-|-|-|-
+base|75.27|1.420|81.48|1.157
+base<sup>std</sup>|74.67|1.688|81.57|0.915
+base<sup>ent</sup>|**75.93**|1.467|82.24|0.863
+ATLX|75.64|1.275|82.62|**0.498**
+ATLX<sup>std</sup>|75.64|1.275|82.68|0.559
+ATLX<sup>ent</sup>|75.53|**1.265**|**82.86**|1.115
+ATLX<sup>*</sup>|74.99|1.638|82.03|1.409
+base<sup>LX</sup>|71.98|1.588|79.24|2.322
+
+CV：验证集<br>
+<sup>std</sup>：损失函数加入标准差<br>
+<sup>ent</sup>：损失函数加入负信息熵<br>
+ATLX<sup>*</sup>：将词典信息加入到注意力分数的计算<br>
+base<sup>LX</sup>：将情感分数拼接到词嵌入作为基线的输入
+
+## Discussion
+
+### ATLX
+基线仅能够关注有情感信息的词，而ATLX还能够正确预测极性<br>
+当词典信息加入到注意力的分数计算，ATLX<sup>*</sup>实验结果显示性能下降
+```
+我的分析：
+1.AT-LSTM的注意力分数是由LSTM隐藏层输出H和方面嵌入v<sub>a</sub>计算出来的，加入词典信息需要训练新的参数，
+  参数增加可能等同于引入噪声
+2.词典信息的值两极分化严重，情感词数量远小于非情感词数量且非情感词的取值为0，加入情感信息会使过度关注问题更严重，
+  抵消后面的注意力向量正则化的作用
+```
+base<sup>LX</sup>实验结果显示，词典信息需要经过处理才能对模型有更好的帮助
+
+### Attention Regularization
+标准差反映组内个体间的离散程度，在最小化标准差的过程中，注意力分数分配到相近甚至相同权重，这和注意力机制的想法相悖，因此标准差模型性能弱于负信息熵模型<br>
+负信息熵模型虽然权重几乎均匀分布，但是它对对权重相对较高的几个位置保持敏感
+
+## Parameter Settings
+Parameter name|Value
+-|-
+batch size|25
+aspect embedding dim|300
+LSTM layer(s)|1
+droupout|0.5
+learning rate|0.01
+λ|0.001
+β base<sup>std</sup>|1e-3
+β base<sup>ent</sup>|0.5
+β ATLX<sup>std</sup>|1e-4
+β ATLX<sup>ent</sup>|0.006
+
+## Conclusion and Future Works
+作者提出利用词典信息搭建神经网络，同时使用2种正则化方法减少注意力过拟合问题的影响<br>
+特定于域和方面的细粒度词典可以进一步改善类似模型<br>
+负信息熵正则化虽然能够减少过拟合问题，但是最好的方法是设计能够新的注意力框架，使得注意力的分布更清晰和稀疏——关注更多位置的单词
