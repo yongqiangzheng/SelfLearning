@@ -25,9 +25,23 @@ y<sup>ˆ</sup> = softmax(W<sub>s</sub>h<sup>∗</sup> + b<sub>s</sub>)<br>
 loss = -Σ<sub>i</sub> y<sub>i</sub>log(y<sup>ˆ</sup><sub>i</sub>)+λ||Θ||<sup>2</sup><sub>2</sub>
 
 ### ATLX
+
+#### Lexicon Build
+作者合并MPQA, Opinion Lexicon, Opener和Vader四个词典，SentiWordNet因引入噪音而被移除<br>
+将每个词在不同词典的最大极性分数拼接，作为该词的极性分数向量
+
+```
+adorable [1.0, 1.0, 1.0, 0.55] MPQA(1.0), Opener(1.0), Opinion Lexicon(1.0) and Vader(0.55)
+部分词典没有的词取所有可用词典的平均值作为缺失值
+所有词典都没有的词取0向量
+```
+
+#### Lexicon Integration
 L = W<sub>l</sub>V<sub>l</sub><br>
 l = Lα<sup>T</sup><br>
 h<sup>∗</sup> = tanh(W<sub>p</sub>r + W<sub>x</sub>h<sub>N</sub> + W<sub>l</sub>l)<br>
 loss = -Σ<sub>i</sub>y<sub>i</sub>log(y<sup>ˆ</sup><sub>i</sub>)+λ||Θ||<sup>2</sup><sub>2</sub> + β · R(α)<br>
 R(α) = σ(α)<br>
 R(α) = =-\[-Σ<sub>i</sub><sup>N</sup> α<sub>i</sub> · log(α<sub>i</sub>)]
+
+
