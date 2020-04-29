@@ -74,7 +74,7 @@ SentiWordNet版本对比<br>
 SentiWordNet1.0 vs Micro-WN(OP)<br>
 SentiWordNet3.0 vs Micro-WN(OP)-3.0
 
-&nbsp | Positivity | Negativity
+&nbsp;| Positivity | Negativity
 -|-|-
 SentiWordNet 1.0 | .349 | .296
 SentiWordNet 3.0 |.281 (-19.48%) |.231 (-21.96%)
