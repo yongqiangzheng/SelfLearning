@@ -11,5 +11,3 @@
 ## Attention and Lexicon Regularized LSTM for Aspect-based Sentiment Analysis
 
 * ACL-2019
-
-aaa
