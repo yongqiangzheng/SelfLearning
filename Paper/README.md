@@ -10,3 +10,7 @@
 ## 2020.02.28
 - Attention and Lexicon Regularized LSTM for Aspect-based Sentiment Analysis
 - ACL-2019([Paper](/Paper/Sentiment%20Lexicon/20200228_Attention%20and%20Lexicon%20Regularized%20LSTM%20for%20Aspect-based%20Sentiment%20Analysis.pdf)/[Notes](/Paper/Sentiment%20Lexicon/20200228.md))
+
+## 2022.07.10
+- BiSyn-GAT+: Bi-Syntax Aware Graph Attention Network for Aspect-based Sentiment Analysis
+- ACL(Findings)-2022([Paper](/Paper/Constituency%20Parsing/2022_07_10_BiSyn-GAT%2B%20Bi-Syntax%20Aware%20Graph%20Attention%20Network%20for%20Aspect-based%20Sentiment%20Analysis.pdf)/[Notes](/Paper/Constituency%20Parsing/2022_07_10.pdf))
