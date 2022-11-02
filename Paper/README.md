@@ -14,3 +14,7 @@
 ## 2022.07.10
 - BiSyn-GAT+: Bi-Syntax Aware Graph Attention Network for Aspect-based Sentiment Analysis
 - ACL(Findings)-2022([Paper](/Paper/Constituency%20Parsing/2022_07_10_BiSyn-GAT%2B%20Bi-Syntax%20Aware%20Graph%20Attention%20Network%20for%20Aspect-based%20Sentiment%20Analysis.pdf)/[Notes](/Paper/Constituency%20Parsing/2022_07_10.pdf))
+
+## 2022.11.02
+- Discrete Opinion Tree Induction for Aspect-based Sentiment Analysis
+- ACL-2022([Paper](/Paper/2022_11_02_Discrete%20Opinion%20Tree%20Induction%20for%20Aspect-based%20Sentiment%20Analysis.pdf)/Notes/[PPT](2022_11_02_dotGCN.pptx))
