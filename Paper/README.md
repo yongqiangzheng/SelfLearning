@@ -17,4 +17,4 @@
 
 ## 2022.11.02
 - Discrete Opinion Tree Induction for Aspect-based Sentiment Analysis
-- ACL-2022([Paper](/Paper/2022_11_02_Discrete%20Opinion%20Tree%20Induction%20for%20Aspect-based%20Sentiment%20Analysis.pdf)/Notes/[PPT](2022_11_02_dotGCN.pptx))
+- ACL-2022([Paper](/Paper/2022_11_02_Discrete%20Opinion%20Tree%20Induction%20for%20Aspect-based%20Sentiment%20Analysis.pdf)/[PPT](2022_11_02_dotGCN.pptx))
