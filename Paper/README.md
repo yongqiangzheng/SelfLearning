@@ -15,6 +15,13 @@
 - BiSyn-GAT+: Bi-Syntax Aware Graph Attention Network for Aspect-based Sentiment Analysis
 - ACL(Findings)-2022([Paper](/Paper/Constituency%20Parsing/2022_07_10_BiSyn-GAT%2B%20Bi-Syntax%20Aware%20Graph%20Attention%20Network%20for%20Aspect-based%20Sentiment%20Analysis.pdf)/[Notes](/Paper/Constituency%20Parsing/2022_07_10.pdf))
 
+## 2022.09.14
+- A Contrastive Cross-Channel Data Augmentation Framework for Aspect-Based Sentiment Analysis
+- COLING-2022([Paper](/Paper/2022_09_14_A%20Contrastive%20Cross-Channel%20Data%20Augmentation%20Framework%20for%20Aspect-Based%20Sentiment%20Analysis.pdf))
 ## 2022.11.02
 - Discrete Opinion Tree Induction for Aspect-based Sentiment Analysis
 - ACL-2022([Paper](/Paper/2022_11_02_Discrete%20Opinion%20Tree%20Induction%20for%20Aspect-based%20Sentiment%20Analysis.pdf)/[PPT](2022_11_02_dotGCN.pptx))
+
+## 2022.11.30
+- Aspect Feature Distillation and Enhancement Network for Aspect-based Sentiment Analysis
+- SIGIR-2022([Paper](/Paper/2022_11_30_Aspect%20Feature%20Distillation%20and%20Enhancement%20Network%20for%20Aspect-based%20Sentiment%20Analysis.pdf)/[PPT](/Paper/2022_11_30_AFDEN.pptx))
