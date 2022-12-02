@@ -13,10 +13,6 @@ git push
 git branch -b dev
 git checkout dev
 
-# another way to create and change branch
-git swich -c dev
-git swich dev
-
 # merge other brance
 git checkout master
 git merge dev
