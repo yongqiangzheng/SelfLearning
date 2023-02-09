@@ -1,5 +1,7 @@
 # Anaconda
+
 ### 创建环境
+
 ```
 conda create -n <环境名> python=<版本号>
 ```
@@ -74,4 +76,3 @@ conda install --yes --file requirements.txt # 安装
 pip freeze > requirements.txt # 导出
 pip install -r requirements.txt # 安装
 ```
-

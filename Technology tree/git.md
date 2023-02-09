@@ -10,7 +10,7 @@ git commit -m "update"
 git push
 
 # create and change branch
-git branch -b dev
+git branch dev
 git checkout dev
 
 # merge other brance
