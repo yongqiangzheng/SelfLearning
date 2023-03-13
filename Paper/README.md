@@ -28,6 +28,11 @@
 1. 成分树将复杂句子划分成多个子句，对齐方面及其上下文
 2. 利用依存树的句法信息和成分树的层次结构，对方面上下文和方面之间的关系进行建模
 
+<center>
+<img src='/Paper/figure/BiSyn-GAT2.png' width='50%' height='50%' />
+Figure 1
+</center>
+
 ![Model](/Paper/figure/BiSyn-GAT2.png)
 
 ### Result
